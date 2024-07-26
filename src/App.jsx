@@ -1,18 +1,33 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import Game from "./pages/Game/Game";
-import EnterName from "./pages/EnterName/EnterName";
+import { EnterName, Game, Room } from "./pages";
+//import { GlobalContextProvider } from "./context/GlobalContext";
+
+export const GlobalContext = createContext();
 
 const App = () => {
+  const [name, setName] = useState("");
+  const [mainRoomCode, setMainRoomCode] = useState("");
+  const [player, setPlayer] = useState("");
+
   return (
-    <div>
+    <GlobalContext.Provider
+      value={{
+        name,
+        setName,
+        mainRoomCode,
+        setMainRoomCode,
+        player,
+        setPlayer,
+      }}
+    >
       <Routes>
         <Route path="/" element={<EnterName />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/room" element={<Room />} />
         <Route path="/game" element={<Game />} />
       </Routes>
-    </div>
+    </GlobalContext.Provider>
+    // <div>hii</div>
   );
 };
 
