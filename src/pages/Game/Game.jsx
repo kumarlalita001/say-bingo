@@ -74,7 +74,7 @@ const Game = () => {
 
   let [fetchedArray, setFetchedArray] = useState([]);
 
-  const [isLoading, setIsLoading] = useState("");
+  const [isRestart, setIsRestart] = useState(false);
 
   const checkWin = () => {
     let checked = 0;
@@ -182,6 +182,10 @@ const Game = () => {
     // return () => gameRef.off(); // cleanup function to unsubscribe listener
   };
 
+  useEffect(() => {
+    fillGrid();
+  }, [isRestart]);
+
   // useEffect(() => {
   //   updateGrid();
   // }, []);
@@ -190,11 +194,13 @@ const Game = () => {
     // clear Database
     const roomCode = JSON.parse(localStorage.getItem("roomCode"));
 
-    // remove(ref(db, "GRID" + "-Player1-" + roomCode));
-    // remove(ref(db, "GRID" + "-Player2-" + roomCode));
+    remove(ref(db, "GRID" + "-Player1-" + roomCode));
+    remove(ref(db, "GRID" + "-Player2-" + roomCode));
     remove(ref(db, "Winner" + roomCode));
+    setIsWin(false);
+    setIsRestart(true);
 
-    location.reload();
+    // location.reload();
   };
 
   const handleSayBingo = () => {
