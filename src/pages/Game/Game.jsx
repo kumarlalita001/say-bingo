@@ -199,6 +199,7 @@ const Game = () => {
     remove(ref(db, "Winner" + roomCode));
     setIsWin(false);
     setIsRestart(true);
+    fillGrid();
 
     // location.reload();
   };
