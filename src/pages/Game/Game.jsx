@@ -197,9 +197,11 @@ const Game = () => {
     remove(ref(db, "GRID" + "-Player1-" + roomCode));
     remove(ref(db, "GRID" + "-Player2-" + roomCode));
     remove(ref(db, "Winner" + roomCode));
+
     setIsWin(false);
     setIsRestart(true);
     fillGrid();
+    setNumbers(flattenArray(grid));
 
     // location.reload();
   };
